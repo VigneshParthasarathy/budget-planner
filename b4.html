@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Budget Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #f9f9f9, #e6f7ff);
+      color: #333;
+    }
+
+    header {
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 3em;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .container {
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .budget-form {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .budget-form input, .budget-form button, .budget-form select {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .budget-result {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f0faff;
+      border-left: 5px solid #00bcd4;
+      border-radius: 10px;
+    }
+
+    .suggestions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .footer {
+      background: #222;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Plan Your Dream Event Within Budget</h1>
+  </header>
+
+  <section class="container">
+    <div class="budget-form">
+      <h2>Enter Your Budget</h2>
+      <input type="number" id="budget" placeholder="Enter total budget in ₹">
+      <button onclick="calculateBudget()">Calculate Plan</button>
+    </div>
+
+    <div class="budget-result" id="result" style="display: none;">
+      <h3>Estimated Allocation</h3>
+      <ul id="allocation"></ul>
+    </div>
+
+    <div class="suggestions">
+      <a class="card" href="party-hall.html">
+        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1" alt="Party Hall">
+        <div class="card-content">
+          <h4>Elegant Party Hall</h4>
+          <p>Starts at ₹8,000 | Nearby | Great Reviews</p>
+        </div>
+      </a>
+      <a class="card" href="beach-trip.html">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c" alt="Beach Trip">
+        <div class="card-content">
+          <h4>Goa Beach Trip</h4>
+          <p>Travel + Stay from ₹15,000 | Book Now</p>
+        </div>
+      </a>
+      <a class="card" href="wedding-lawn.html">
+        <img src="https://watermark.lovepik.com/photo/20211202/large/lovepik-lawn-wedding-set-picture_501388315.jpg" alt="Wedding Venue">
+        <div class="card-content">
+          <h4>Wedding Lawn</h4>
+          <p>Starts at ₹25,000 | Open Air Venue</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Budget Planner | Plan Smart, Celebrate Big</p>
+  </footer>
+
+  <script>
+    function calculateBudget() {
+      const budget = parseInt(document.getElementById("budget").value);
+      if (!budget || budget <= 0) return;
+
+      const allocation = [
+        { label: "Venue", amount: budget * 0.3 },
+        { label: "Food & Catering", amount: budget * 0.25 },
+        { label: "Travel & Stay", amount: budget * 0.2 },
+        { label: "Decoration", amount: budget * 0.15 },
+        { label: "Entertainment", amount: budget * 0.1 },
+      ];
+
+      const list = document.getElementById("allocation");
+      list.innerHTML = "";
+      allocation.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.label}: ₹${item.amount.toFixed(2)}`;
+        list.appendChild(li);
+      });
+
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+</body>
+
+</html>
